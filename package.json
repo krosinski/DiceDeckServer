@@ -1,0 +1,28 @@
+{
+  "name": "DiceDeck server",
+  "version": "0.1.4",
+  "description": "A backend for dice deck chat/dice roller",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+      "express": "~4.12.x",
+      "websocket": "1.0.12"
+  },
+  "engines": {
+    "node": "0.10.25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "dice",
+    "chat"
+  ],
+  "license": "MIT"
+}
