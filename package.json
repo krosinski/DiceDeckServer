@@ -1,5 +1,5 @@
 {
-  "name": "DiceDeck server",
+  "name": "DiceDeckServer",
   "version": "0.1.4",
   "description": "A backend for dice deck chat/dice roller",
   "main": "app.js",
