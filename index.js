@@ -12,6 +12,8 @@ var fs = require('fs');
  * Global variables
  */
 
+var preferredColors = {};
+
 var historyData = {
   "messages": [],
   "players": {}
@@ -98,10 +100,21 @@ wsServer.on('request', function(request) {
             if (userName === false) {
                 if (msg.event === "login"){
                     userName = htmlEntities(msg.data.username);
-                    userColor = colors.shift();
+                    userColor = preferredColors[userName];
+                    if (userColor == undefined) {
+                        userColor = colors.shift();
+                        preferredColors[userName] = userColor;
+                    }
+                    else {
+                      for (var i=0;i<colors.length;++i){
+                        if (colors[i] == userColor) {
+                          colors.splice(i, 1);
+                          break;
+                        }
+                      }
+                    }
+
                     historyData.players[userName] = {username: userName, color: userColor};
-
-
                     connection.sendUTF(JSON.stringify({ event:'auth', data: {username: userName, color: userColor }}));
                     for (var i=0; i < clients.length; i++) {
                         clients[i].sendUTF(JSON.stringify({ event: 'logged_in', data: {username: userName, color: userColor}}));
@@ -110,6 +123,7 @@ wsServer.on('request', function(request) {
                     console.log((new Date()) + ' User is known as: ' + userName
                         + ' with ' + userColor + ' color.');
                 }
+
             } else { // log and broadcast the message
                 console.log((new Date()) + ' Received Message from '
                     + userName + ': ' + message.utf8Data);
