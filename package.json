@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-      "express": "~4.12.x",
+      "express": "4.12.4",
       "websocket": "1.0.12"
   },
   "engines": {
